@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Container, Typography, Paper, Button, Stack } from '@mui/material';
+import Terminal from './components/Terminal';
+import { LINKEDIN, GITHUB } from './consts';
 
 const typingText = "Hi, I'm Tavis!";
 
@@ -78,59 +80,48 @@ function App() {
           >
             Full Stack Developer
             <br />
-            Welcome to my portfolio!
-          </Typography>
-          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} justifyContent="center">
-            <Button
-              variant="outlined"
-              sx={{
-                color: '#00FF41',
-                borderColor: '#00FF41',
-                fontFamily: 'monospace',
-                '&:hover': {
-                  borderColor: '#B2FFB2',
-                  background: '#181818',
-                },
-              }}
-              href="#projects"
-            >
-              {'<Projects />'}
-            </Button>
-            <Button
-              variant="outlined"
-              sx={{
-                color: '#00FF41',
-                borderColor: '#00FF41',
-                fontFamily: 'monospace',
-                '&:hover': {
-                  borderColor: '#B2FFB2',
-                  background: '#181818',
-                },
-              }}
-              href="#contact"
-            >
-              {'<Contact />'}
-            </Button>
-            <Button
-              variant="outlined"
-              sx={{
-                color: '#00FF41',
-                borderColor: '#00FF41',
-                fontFamily: 'monospace',
-                '&:hover': {
-                  borderColor: '#B2FFB2',
-                  background: '#181818',
-                },
-              }}
-              href="https://github.com/tavmac"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {'<GitHub />'}
-            </Button>
-          </Stack>
+            <hr/> 
+            Welcome to my portfolio! <br />
+            Use the terminal located on the bottom right of your screen to navigate to different          </Typography>
+            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} justifyContent="center">
+              <Button
+                variant="outlined"
+                sx={{
+                  color: '#00FF41',
+                  borderColor: '#00FF41',
+                  fontFamily: 'monospace',
+                  '&:hover': {
+                    borderColor: '#B2FFB2',
+                    background: '#181818',
+                  },
+                }}
+                target="_blank"
+                rel="noopener noreferrer"
+                href={LINKEDIN}
+              >
+                {'LINKEDIN'}
+              </Button>
+              <Button
+                variant="outlined"
+                sx={{
+                  color: '#00FF41',
+                  borderColor: '#00FF41',
+                  fontFamily: 'monospace',
+                  '&:hover': {
+                    borderColor: '#B2FFB2',
+                    background: '#181818',
+                  },
+                }}
+                target="_blank"
+                rel="noopener noreferrer"
+                href={GITHUB}
+              >
+                {'GITHUB'}
+              </Button>
+            </Stack>
         </Paper>
       </Container>
+      <Terminal/>
     </Box>
   );
 }
