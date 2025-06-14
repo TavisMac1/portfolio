@@ -47,7 +47,7 @@ export class CommandHelper
         const threshold = 50;
 
         for (let i = 0; i < commands.length; i++) {
-            let match_score = ratio(input, commands[i]);
+            let match_score = ratio(input.toLowerCase(), commands[i].toLowerCase());
 
             if (match_score > threshold) {
                 let new_match: Interfaces.IPotentialMatchRecord = { 

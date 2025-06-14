@@ -10,7 +10,7 @@ const COMMANDS: Array<Interfaces.ICommands> = [
     { command: Enums.Commands.CONTACT, description: "Contact info" },
 ];
 
-const Terminal: React.FC = (): React.ReactElement => {
+const Terminal: React.FunctionComponent<Interfaces.ITerminalProps> = (props) => {
     const [history, setHistory] = useState<Array<string>>([]);
     const [input, setInput] = useState("");
     const inputRef = useRef<HTMLInputElement>(null);
@@ -20,7 +20,7 @@ const Terminal: React.FC = (): React.ReactElement => {
         inputRef.current?.focus();
     }, []);
 
-    const handleCommand = (cmd: string): string | React.ReactElement => {
+    const handleCommand = (cmd: string): string  => {
         switch (cmd) {
             case "help":
                 return COMMANDS.map(c => `${c.command} - ${c.description}`).join("\n");
@@ -30,7 +30,8 @@ const Terminal: React.FC = (): React.ReactElement => {
                     Enjoys solving logic problems, designing systems, working with bright people, developing code and configuring systems.\n I spend a lot of my time working on personal projects and learning new technologies which peak my interesting (hoping to try Elm soon :))\n. I strongly believe there is no 'I' in team and love teaching, learning and working with others.
                 `;
             case "projects":
-                return ""; // return a react elem
+                props.setProjectViewOpen(true);
+                return "Opening Projects. . ."
             case "contact":
                 return "Email: macfarlanetavis@protonmail.com";
             default:
@@ -46,12 +47,7 @@ const Terminal: React.FC = (): React.ReactElement => {
 
         const output = handleCommand(transformed);
 
-        if (typeof(output) == "string") {
-            setHistory(prev => [...prev, `> ${transformed}`, output]);
-        }
-        else {
-            setHistory(prev => [...prev, `> ${input}`, "Navigating. . ."]);
-        }
+        setHistory(prev => [...prev, `> ${transformed}`, output]);
 
         setInput("");
     };

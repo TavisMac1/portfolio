@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 export namespace Interfaces {
 
     export interface ICommands {
@@ -6,10 +8,20 @@ export namespace Interfaces {
     }
 
     export interface ITerminalDrawerProps {
+        setOpen: Dispatch<SetStateAction<boolean>>;
         open: boolean;
+        projects?: React.ReactElement[];
+    }
+
+    export interface IProject {
+        image: string;
         title: string;
-        description?: string;
-        images: string[];
+        description: string;
+        technologies: string[];
+    }
+
+    export interface ITerminalProps {
+        setProjectViewOpen: Dispatch<SetStateAction<boolean>>;
     }
 
     export interface IPotentialMatchRecord {

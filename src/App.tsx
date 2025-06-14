@@ -2,11 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Box, Container, Typography, Paper, Button, Stack } from '@mui/material';
 import Terminal from './components/Terminal';
 import { LINKEDIN, GITHUB } from './consts';
+import ProjectsView from './components/ProjectsView';
+import { GeneralUtils } from './utils/GeneralUtils';
 
 const typingText = "Hi, I'm Tavis!";
 
 function App() {
   const [displayed, setDisplayed] = useState('');
+  const [isProjectDrawerOpen, setIsProjectDrawerOpen] = React.useState<boolean>(false);
+  const generalUtils: GeneralUtils = new GeneralUtils();
 
   useEffect(() => {
     let i = 0;
@@ -19,6 +23,7 @@ function App() {
   }, []);
 
   return (
+    <>
     <Box
       sx={{
         minHeight: '100vh',
@@ -82,47 +87,54 @@ function App() {
             <br />
             <hr/> 
             Welcome to my portfolio! <br />
-            Use the terminal located on the bottom right of your screen to navigate to different          </Typography>
-            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} justifyContent="center">
-              <Button
-                variant="outlined"
-                sx={{
-                  color: '#00FF41',
-                  borderColor: '#00FF41',
-                  fontFamily: 'monospace',
-                  '&:hover': {
-                    borderColor: '#B2FFB2',
-                    background: '#181818',
-                  },
-                }}
-                target="_blank"
-                rel="noopener noreferrer"
-                href={LINKEDIN}
-              >
-                {'LINKEDIN'}
-              </Button>
-              <Button
-                variant="outlined"
-                sx={{
-                  color: '#00FF41',
-                  borderColor: '#00FF41',
-                  fontFamily: 'monospace',
-                  '&:hover': {
-                    borderColor: '#B2FFB2',
-                    background: '#181818',
-                  },
-                }}
-                target="_blank"
-                rel="noopener noreferrer"
-                href={GITHUB}
-              >
-                {'GITHUB'}
-              </Button>
-            </Stack>
+            Use the terminal located on the bottom right of your screen to navigate . . .    
+          </Typography>
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} justifyContent="center">
+            <Button
+              variant="outlined"
+              sx={{
+                color: '#00FF41',
+                borderColor: '#00FF41',
+                fontFamily: 'monospace',
+                '&:hover': {
+                  borderColor: '#B2FFB2',
+                  background: '#181818',
+                },
+              }}
+              target="_blank"
+              rel="noopener noreferrer"
+              href={LINKEDIN}
+            >
+              {'LINKEDIN'}
+            </Button>
+            <Button
+              variant="outlined"
+              sx={{
+                color: '#00FF41',
+                borderColor: '#00FF41',
+                fontFamily: 'monospace',
+                '&:hover': {
+                  borderColor: '#B2FFB2',
+                  background: '#181818',
+                },
+              }}
+              target="_blank"
+              rel="noopener noreferrer"
+              href={GITHUB}
+            >
+              {'GITHUB'}
+            </Button>
+          </Stack>
         </Paper>
       </Container>
-      <Terminal/>
     </Box>
+    <Terminal setProjectViewOpen={setIsProjectDrawerOpen}/>
+    <ProjectsView 
+      open={isProjectDrawerOpen} 
+      setOpen={setIsProjectDrawerOpen}
+      projects={generalUtils.GenerateProjects()}
+    />
+    </>
   );
 }
 
