@@ -181,6 +181,17 @@ const Terminal: React.FunctionComponent<Interfaces.ITerminalProps> = (props) => 
                     }}
                     autoComplete="off"
                     placeholder="Type a command here"
+                    onKeyDown={e => {
+                        if (e.key === "Tab") {
+
+                            // prevents URL bar focus
+                            e.preventDefault();
+
+                            setInput(
+                                commandHelper.MatchToCommand(input)
+                            );
+                        }
+                    }}
                 />
             </form>
           </div>
