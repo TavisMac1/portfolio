@@ -5,26 +5,13 @@ import { Interfaces } from "../interfaces/main_d";
 export class CommandHelper
 {
 
-    private NormalizeInput(command: string): string
-    {
-        let edited = command.trim();
-
-        let tokens = edited.split(" ");
-
-        for (let i = 0; i < tokens.length; i++)
-        {
-            let token = tokens[i].trim();
-
-            if (token) tokens[i] = token; 
-            else {
-                delete tokens[i];
-                i--;
-            }
-        }
-
-        edited = tokens.join(" ");
-
-        return edited;
+    private NormalizeInput(command: string): string {
+        return command
+            .trim()
+            .split(" ")
+            .map(token => token.trim())
+            .filter(token => token.length > 0)
+            .join(" ");
     }
 
     public MatchToCommand(command: string): string {
@@ -37,7 +24,8 @@ export class CommandHelper
             Enums.Commands.ABOUT,
             Enums.Commands.CONTACT,
             Enums.Commands.HELP,
-            Enums.Commands.PROJECTS
+            Enums.Commands.PROJECTS,
+            Enums.Commands.SKILLS
         ];
 
         let best_matches: Array<Interfaces.IPotentialMatchRecord> = [];

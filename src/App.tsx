@@ -4,12 +4,14 @@ import Terminal from './components/Terminal';
 import { LINKEDIN, GITHUB } from './consts';
 import ProjectsView from './components/ProjectsView';
 import { GeneralUtils } from './utils/GeneralUtils';
+import { Progression } from './components/Progression';
 
 const typingText = "Hi, I'm Tavis!";
 
 function App() {
   const [displayed, setDisplayed] = useState('');
   const [isProjectDrawerOpen, setIsProjectDrawerOpen] = React.useState<boolean>(false);
+  const [progression, setProgression] = React.useState<number>(0);
   const generalUtils: GeneralUtils = new GeneralUtils();
 
   useEffect(() => {
@@ -76,6 +78,8 @@ function App() {
         }}
       >
         <Container maxWidth="md">
+          <Progression value={progression}/>
+          <br/>
           <Paper
             elevation={6}
             sx={{
@@ -169,7 +173,11 @@ function App() {
           </Paper>
         </Container>
       </Box>
-      <Terminal setProjectViewOpen={setIsProjectDrawerOpen}/>
+      <Terminal 
+        setProjectViewOpen={setIsProjectDrawerOpen}
+        setProgression={setProgression}
+        progression={progression}
+      />
       <ProjectsView 
         open={isProjectDrawerOpen} 
         setOpen={setIsProjectDrawerOpen}

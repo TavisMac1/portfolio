@@ -22,6 +22,8 @@ export namespace Interfaces {
 
     export interface ITerminalProps {
         setProjectViewOpen: Dispatch<SetStateAction<boolean>>;
+        setProgression: Dispatch<SetStateAction<number>>;
+        progression: number;
     }
 
     export interface IPotentialMatchRecord {
