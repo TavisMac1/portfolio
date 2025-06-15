@@ -2,11 +2,12 @@ import { Interfaces } from "./interfaces/main_d";
 
 export const GoodnightComputer: Interfaces.IProject = {
     title: "Goodnight Computer",
-    description: "Goodnight",
-    image: "",
+    description: `Goodnight Computer is an app that allows users to cease background apps using automation, as well as giving them full control over the applications being run on the system.\n`,
+    image: "images/gnc_image.png",
     technologies: [
         "C#",
-        "Avalonia"
+        "Avalonia",
+        "SQLite"
     ]
 }
 

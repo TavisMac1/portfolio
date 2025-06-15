@@ -5,6 +5,8 @@ import { Interfaces } from "../interfaces/main_d";
 export class CommandHelper
 {
 
+    private original_input = "";
+
     private NormalizeInput(command: string): string
     {
         let edited = command.trim();
@@ -28,8 +30,10 @@ export class CommandHelper
     }
 
     public MatchToCommand(command: string): string {
-        
+
         if (!command) return "";
+
+        this.original_input = command;
      
         let input = this.NormalizeInput(command);
 
@@ -62,6 +66,8 @@ export class CommandHelper
         most_probable_command = best_matches.slice().sort(
             (a: Interfaces.IPotentialMatchRecord, b: Interfaces.IPotentialMatchRecord) => b.score - a.score
         )[0]?.name || "";
+
+        if (!most_probable_command) return command;
 
         return most_probable_command;
     }

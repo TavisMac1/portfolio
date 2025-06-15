@@ -2,6 +2,10 @@ import React, { useState, useRef, useEffect } from "react";
 import { Interfaces } from "../interfaces/main_d";
 import { Enums } from "../enums/enums";
 import { CommandHelper } from "../utils/CommandHelper";
+import { Height } from "@mui/icons-material";
+import { Fade, IconButton } from "@mui/material";
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 const COMMANDS: Array<Interfaces.ICommands> = [
     { command: Enums.Commands.HELP, description: "Show available commands" },
@@ -12,9 +16,14 @@ const COMMANDS: Array<Interfaces.ICommands> = [
 
 const Terminal: React.FunctionComponent<Interfaces.ITerminalProps> = (props) => {
     const [history, setHistory] = useState<Array<string>>([]);
-    const [input, setInput] = useState("");
+    const [input, setInput] = useState<string>("");
     const inputRef = useRef<HTMLInputElement>(null);
     const commandHelper = new CommandHelper();
+    const [visible, setVisible] = useState<boolean>(true);
+
+    const handleToggle = () => {
+        setVisible((v) => !v);
+    };
 
     useEffect(() => {
         inputRef.current?.focus();
@@ -22,18 +31,21 @@ const Terminal: React.FunctionComponent<Interfaces.ITerminalProps> = (props) => 
 
     const handleCommand = (cmd: string): string  => {
         switch (cmd) {
-            case "help":
+            case Enums.Commands.HELP:
                 return COMMANDS.map(c => `${c.command} - ${c.description}`).join("\n");
-            case "about":
+            case Enums.Commands.ABOUT:
                 return `
                     Intermediate full stack developer.\n
                     Enjoys solving logic problems, designing systems, working with bright people, developing code and configuring systems.\n I spend a lot of my time working on personal projects and learning new technologies which peak my interesting (hoping to try Elm soon :))\n. I strongly believe there is no 'I' in team and love teaching, learning and working with others.
                 `;
-            case "projects":
+            case Enums.Commands.PROJECTS:
                 props.setProjectViewOpen(true);
-                return "Opening Projects. . ."
-            case "contact":
+                return "Opening Projects . ."
+            case Enums.Commands.CONTACT:
                 return "Email: macfarlanetavis@protonmail.com";
+            case Enums.Commands.CLS:
+                setHistory([]);
+                return ""
             default:
                 return `Command not found: ${cmd}`;
         }
@@ -53,20 +65,57 @@ const Terminal: React.FunctionComponent<Interfaces.ITerminalProps> = (props) => 
     };
 
     return (
-        <div style={{
+      <div>
+        <IconButton
+          onClick={handleToggle}
+          sx={{
             position: "fixed",
-            bottom: 0,
-            right: 0,
-            width: 380,
-            background: "#181818",
-            color: "#33FF33",
-            fontFamily: "monospace",
-            borderTopLeftRadius: 8,
-            boxShadow: "0 0 16px #000",
-            zIndex: 1000,
-            padding: 0,
-            border: "2px solid #222"
-        }}>
+            bottom: 16,
+            right: 16,
+            zIndex: 1100,
+            color: '#00FF41',
+            bgcolor: '#181818',
+            border: '1px solid #00FF41',
+            '&:hover': { bgcolor: '#232323' },
+            display: visible ? 'none' : 'inline-flex',
+          }}
+          aria-label="Show terminal"
+        >
+          <VisibilityIcon />
+        </IconButton>
+        <Fade in={visible}>
+          <div 
+            style={{
+              position: "fixed",
+              bottom: 0,
+              right: 0,
+              width: 380,
+              background: "#181818",
+              color: "#33FF33",
+              fontFamily: "monospace",
+              borderTopLeftRadius: 8,
+              boxShadow: "0 0 16px #000",
+              zIndex: 1000,
+              padding: 0,
+              border: "2px solid #222",
+              height: "100vh"
+            }}
+          >
+            <IconButton
+              onClick={handleToggle}
+              sx={{
+                position: "absolute",
+                top: 8,
+                right: 8,
+                color: '#00FF41',
+                bgcolor: '#181818',
+                border: '1px solid #00FF41',
+                '&:hover': { bgcolor: '#232323' },
+              }}
+              aria-label="Hide terminal"
+            >
+              <VisibilityOffIcon />
+            </IconButton>
             <div style={{
                 borderBottom: "1px solid #222",
                 padding: "8px 16px",
@@ -83,26 +132,37 @@ const Terminal: React.FunctionComponent<Interfaces.ITerminalProps> = (props) => 
                 </ul>
             </div>
             <div style={{
-                maxHeight: 120,
+                maxHeight: "70%",
                 overflowY: "auto",
                 padding: "8px 16px",
                 fontSize: 15,
-                minHeight: 60
+                height: "60%",
+                minHeight: "60%"
             }}>
                 {
                     Array.isArray(history) ?
                         history.map((line, i) => (
-                            <div key={i} style={{ whiteSpace: "pre-wrap" }}>{line}</div>
+                            <div key={i} style={{ 
+                                    whiteSpace: "pre-wrap",
+                                    borderTop: '2px dashed #00FF41',
+                                    padding: "10px"
+                                }}
+                            >
+                                {line} 
+                            </div>
                         ))
                     : 
+                    <>
                         history
+                        <hr/>
+                    </>
                 }
             </div>
             <form onSubmit={onSubmit} style={{
                 display: "flex",
                 borderTop: "1px solid #222",
                 background: "#181818",
-                padding: "8px 16px"
+                padding: "8px 16px",
             }}>
                 <span style={{ color: "#33FF33", marginRight: 4 }}>&gt;</span>
                 <input
@@ -116,12 +176,16 @@ const Terminal: React.FunctionComponent<Interfaces.ITerminalProps> = (props) => 
                         color: "#33FF33",
                         fontFamily: "monospace",
                         fontSize: 15,
-                        flex: 1
+                        flex: 1,
+                        height: "100%"
                     }}
                     autoComplete="off"
+                    placeholder="Type a command here"
                 />
             </form>
-        </div>
+          </div>
+        </Fade>
+      </div>
     );
 };
 

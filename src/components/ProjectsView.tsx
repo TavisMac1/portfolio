@@ -37,7 +37,7 @@ export const ProjectsView: React.FC<Interfaces.ITerminalDrawerProps> = ({
 
   return (
     <Drawer
-      anchor="right"
+      anchor="left"
       open={open}
       PaperProps={{
         sx: {
@@ -140,25 +140,6 @@ export const ProjectsView: React.FC<Interfaces.ITerminalDrawerProps> = ({
             </IconButton>
           </Stack>
         )}
-        {/* ASCII art terminal border */}
-        <Box
-          sx={{
-            position: 'absolute',
-            left: 0,
-            bottom: 0,
-            width: '100%',
-            color: '#00FF41',
-            fontFamily: 'monospace',
-            fontSize: '0.8rem',
-            opacity: 0.4,
-            textAlign: 'center',
-            userSelect: 'none',
-            pointerEvents: 'none',
-            letterSpacing: 1,
-          }}
-        >
-          {'└' + '─'.repeat(40) + '┘'}
-        </Box>
       </Box>
     </Drawer>
   );
