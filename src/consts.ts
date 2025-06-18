@@ -4,12 +4,13 @@ export const SKILLS: string = `
 - C#
 - React
 - Javascript
+- TypeScript
 - Azure
 - Python (Python & Django)
 - .NET
 - Java
 - Swift
-- PhP (PhP & Laravel)
+- PHP (PHP & Laravel)
 - SQL (SQLite, SQL Server)
 - NoSQL (Firebase, MongoDB)
 - Unity

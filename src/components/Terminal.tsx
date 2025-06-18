@@ -80,19 +80,35 @@ const Terminal: React.FunctionComponent<Interfaces.ITerminalProps> = (props) => 
 
         const output = handleCommand(transformed);
 
-        setHistory(prev => [...prev, `> ${transformed}`, output]);
+        setHistory(prev => [...prev, `> ${transformed} _`, output]);
         setCommandHistory(prev => [...prev, transformed]);
 
         setInput("");
     };
 
+    // returns the prefix and suffix split 
+    const splitHistoryText = (input: string): Array<string> => {
+
+        if (!input) return ["", ""];
+
+        // prefix
+        const prefixIndex: number = input.indexOf('_');
+        let prefixStr: string = input.slice(0, prefixIndex);
+
+        // suffix
+        let suffixStr: string = input.slice(prefixIndex, input.length);
+        prefixStr.replace(' _ ', '');
+        return [prefixStr, suffixStr];
+    }
+
     useEffect(() => {
-        console.log(commandHistory);
         setInput(commandHistory[historyIndex]);
     }, [historyIndex])
 
     return (
-      <div>
+      <div
+        onClick={() => inputRef.current?.focus}
+      >
         <IconButton
           onClick={handleToggle}
           sx={{
@@ -175,22 +191,35 @@ const Terminal: React.FunctionComponent<Interfaces.ITerminalProps> = (props) => 
                                     padding: "10px"
                                 }}
                             >
-                                {line} 
+                                {   <>
+                                        <p>
+                                            {splitHistoryText(line)}
+                                        </p>
+                                        {/*
+                                        <p style={{color: "blue"}}>
+                                            {splitHistoryText(line)}
+                                        </p>
+                                        */}
+                                    </>
+                                } 
                             </div>
                         ))
                     : 
                     <>
-                        history
+                        no history
                         <hr/>
                     </>
                 }
             </div>
-            <form onSubmit={onSubmit} style={{
-                display: "flex",
-                borderTop: "1px solid #222",
-                background: "#181818",
-                padding: "8px 16px",
-            }}>
+            <form onSubmit={onSubmit} 
+                style={{
+                    display: "flex",
+                    borderTop: "1px solid #222",
+                    background: "#181818",
+                    padding: "8px 16px",
+                }}
+                onClick={() => inputRef.current?.focus}
+            >
                 <span style={{ color: "#33FF33", marginRight: 4 }}>&gt;</span>
                 <input
                     ref={inputRef}
@@ -203,9 +232,9 @@ const Terminal: React.FunctionComponent<Interfaces.ITerminalProps> = (props) => 
                         color: "#33FF33",
                         fontFamily: "monospace",
                         fontSize: 15,
-                        flex: 1,
-                        height: "100%"
+                        flex: 1
                     }}
+                    type="text-area"
                     autoComplete="off"
                     placeholder="Type a command here"
                     onKeyDown={e => {
@@ -219,16 +248,14 @@ const Terminal: React.FunctionComponent<Interfaces.ITerminalProps> = (props) => 
                             );
                         }
                         else if (e.key === "ArrowUp") {
-                            console.log("arrow");
+                            e.preventDefault();
                             if (    
-                                    historyIndex !== commandHistory.length && 
-                                    commandHistory[historyIndex -1] !== null &&
-                                    commandHistory[historyIndex -1] !== "undefined"
-                                ) 
-                                {
-                                    console.log("in if");
-                                    setHistoryIndex(historyIndex -1);
-                                }
+                                historyIndex !== commandHistory.length && 
+                                commandHistory[historyIndex -1] !== null &&
+                                commandHistory[historyIndex -1] !== "undefined"
+                            ) {
+                                setHistoryIndex(historyIndex -1);
+                            }
                         }
                     }}
                 />

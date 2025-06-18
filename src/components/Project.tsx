@@ -2,13 +2,14 @@ import React from 'react';
 import {
   Box,
   Typography,
-  IconButton,
   Chip,
   Stack,
   useMediaQuery,
   useTheme,
 } from '@mui/material';
 import { Interfaces } from '../interfaces/main_d';
+import { PhotoProvider, PhotoView } from 'react-photo-view';
+import 'react-photo-view/dist/react-photo-view.css';
 
 export const Project: React.FC<{ project: Interfaces.IProject }> = ({project}) => {
   const theme = useTheme();
@@ -32,35 +33,39 @@ export const Project: React.FC<{ project: Interfaces.IProject }> = ({project}) =
         </Typography>
         {project.image && (
             <Box
-            sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                mb: 3,
-            }}
-            >
-            <Box
                 sx={{
-                border: '1px solid #00FF41',
-                borderRadius: 2,
-                bgcolor: '#181818',
-                boxShadow: '0 0 16px #00FF41',
-                overflow: 'hidden',
-                maxWidth: '90%',
-                maxHeight: 240,
+                    display: 'flex',
+                    justifyContent: 'center',
+                    mb: 3,
                 }}
             >
-                <img
-                src={project.image}
-                alt={project.title}
-                style={{
+                <Box
+                    sx={{
+                    border: '1px solid #00FF41',
+                    borderRadius: 2,
+                    bgcolor: '#181818',
+                    boxShadow: '0 0 16px #00FF41',
+                    overflow: 'hidden',
+                    maxWidth: '90%',
                     maxHeight: 240,
-                    maxWidth: '100%',
-                    objectFit: 'contain',
-                    display: 'block',
-                    margin: '0 auto',
-                }}
-                />
-            </Box>
+                    }}
+                >
+                    <PhotoProvider>
+                        <PhotoView src={project.image}>
+                            <img
+                                src={project.image}
+                                alt={project.title}
+                                style={{
+                                    maxHeight: 240,
+                                    maxWidth: '100%',
+                                    objectFit: 'contain',
+                                    display: 'block',
+                                    margin: '0 auto',
+                                }}
+                            />
+                        </PhotoView>
+                    </PhotoProvider>
+                </Box>
             </Box>
         )}
         <Typography

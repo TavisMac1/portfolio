@@ -25,14 +25,15 @@ export class CommandHelper
             Enums.Commands.CONTACT,
             Enums.Commands.HELP,
             Enums.Commands.PROJECTS,
-            Enums.Commands.SKILLS
+            Enums.Commands.SKILLS,
+            Enums.Commands.CLS
         ];
 
         let best_matches: Array<Interfaces.IPotentialMatchRecord> = [];
 
         let most_probable_command = "";
 
-        const threshold = 50;
+        const threshold = 40;
 
         for (let i = 0; i < commands.length; i++) {
             let match_score = ratio(input.toLowerCase(), commands[i].toLowerCase());

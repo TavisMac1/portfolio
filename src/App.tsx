@@ -132,7 +132,7 @@ function App() {
               <br />
               <span>------------------------------</span><br/>
               Welcome to my portfolio! <br />
-              Use the terminal located on the bottom right of your screen to navigate    
+              Use the terminal located on the right of your screen to navigate    
             </Typography>
             <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} justifyContent="center">
               <Button
