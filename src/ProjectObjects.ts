@@ -13,8 +13,8 @@ export const GoodnightComputer: Interfaces.IProject = {
 
 export const RustExceller: Interfaces.IProject = {
     title: "Rust Exceller",
-    description: "A simple spreadsheet which allows you to type into cells and save as a .txt file for later viewing.",
-    image: "",
+    description: "A simple spreadsheet written in Rust. My first project in Rust for fun! Hoping to keep expanding on the functionality.",
+    image: "exceller.png",
     technologies: [
         "Rust"
     ]
