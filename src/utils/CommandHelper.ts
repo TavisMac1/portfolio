@@ -5,7 +5,7 @@ import { Interfaces } from "../interfaces/main_d";
 export class CommandHelper
 {
 
-    private NormalizeInput(command: string): string {
+    private static NormalizeInput(command: string): string {
         return command
             .trim()
             .split(" ")
@@ -14,7 +14,7 @@ export class CommandHelper
             .join(" ");
     }
 
-    public MatchToCommand(command: string): string {
+    public static MatchToCommand(command: string): string {
 
         if (!command) return "";
      
@@ -26,7 +26,8 @@ export class CommandHelper
             Enums.Commands.HELP,
             Enums.Commands.PROJECTS,
             Enums.Commands.SKILLS,
-            Enums.Commands.CLS
+            Enums.Commands.CLS,
+            Enums.Commands.TRICKS
         ];
 
         let best_matches: Array<Interfaces.IPotentialMatchRecord> = [];

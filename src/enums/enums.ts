@@ -6,7 +6,8 @@ export namespace Enums {
         PROJECTS = "projects",
         CONTACT = "contact",
         CLS = "cls",
-        SKILLS = "skills"
+        SKILLS = "skills",
+        TRICKS = "tricks"
     }
 
 }

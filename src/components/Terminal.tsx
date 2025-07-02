@@ -5,8 +5,9 @@ import { CommandHelper } from "../utils/CommandHelper";
 import { Fade, IconButton } from "@mui/material";
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import { SKILLS } from "../consts";
+import { SKILLS, TRICKS } from "../consts";
 import { ABOUT_DESC } from "../consts";
+import { GeneralUtils } from "../utils/GeneralUtils";
 
 const COMMANDS: Array<Interfaces.ICommands> = [
     { command: Enums.Commands.HELP, description: "Show available commands" },
@@ -14,6 +15,7 @@ const COMMANDS: Array<Interfaces.ICommands> = [
     { command: Enums.Commands.PROJECTS, description: "List projects" },
     { command: Enums.Commands.CONTACT, description: "Contact info" },
     { command: Enums.Commands.SKILLS, description: "My skills" },
+    { command: Enums.Commands.TRICKS, description: "Tips and tricks" }
 ];
 
 const Terminal: React.FunctionComponent<Interfaces.ITerminalProps> = (props) => {
@@ -21,7 +23,6 @@ const Terminal: React.FunctionComponent<Interfaces.ITerminalProps> = (props) => 
     const [commandHistory, setCommandHistory] = useState<Array<string>>([]);
     const [input, setInput] = useState<string>("");
     const inputRef = useRef<HTMLInputElement>(null);
-    const commandHelper = new CommandHelper();
     const [visible, setVisible] = useState<boolean>(true);
     const [historyIndex, setHistoryIndex] = useState<number>(history.length);
 
@@ -47,24 +48,28 @@ const Terminal: React.FunctionComponent<Interfaces.ITerminalProps> = (props) => 
                 return COMMANDS.map(c => `${c.command} - ${c.description}`).join("\n");
             case Enums.Commands.ABOUT:
                 if (determineIfCommandRun(Enums.Commands.ABOUT))
-                    props.setProgression(props.progression + 25);
+                    props.setProgression(props.progression + 20);
 
                 return ABOUT_DESC;
             case Enums.Commands.PROJECTS:
                 if (determineIfCommandRun(Enums.Commands.PROJECTS))
-                    props.setProgression(props.progression + 25);
+                    props.setProgression(props.progression + 20);
                 
                 props.setProjectViewOpen(true);
                 return "Opening Projects . ."
             case Enums.Commands.CONTACT:
                 if (determineIfCommandRun(Enums.Commands.CONTACT))
-                    props.setProgression(props.progression + 25);
+                    props.setProgression(props.progression + 20);
                 
                 return "Email: macfarlanetavis@protonmail.com";
             case Enums.Commands.SKILLS:
                 if (determineIfCommandRun(Enums.Commands.SKILLS))
-                    props.setProgression(props.progression + 25);
+                    props.setProgression(props.progression + 20);
                 return SKILLS;
+            case Enums.Commands.TRICKS:
+                if (determineIfCommandRun(Enums.Commands.TRICKS))
+                    props.setProgression(props.progression + 20);
+                return TRICKS;
             case Enums.Commands.CLS:
                 setHistory([]);
                 return ""
@@ -76,7 +81,7 @@ const Terminal: React.FunctionComponent<Interfaces.ITerminalProps> = (props) => 
     const onSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
-        const transformed = commandHelper.MatchToCommand(input);
+        const transformed = CommandHelper.MatchToCommand(input);
 
         const output = handleCommand(transformed);
 
@@ -244,7 +249,7 @@ const Terminal: React.FunctionComponent<Interfaces.ITerminalProps> = (props) => 
                             e.preventDefault();
 
                             setInput(
-                                commandHelper.MatchToCommand(input)
+                                CommandHelper.MatchToCommand(input)
                             );
                         }
                         else if (e.key === "ArrowUp") {

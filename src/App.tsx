@@ -181,7 +181,7 @@ function App() {
       <ProjectsView 
         open={isProjectDrawerOpen} 
         setOpen={setIsProjectDrawerOpen}
-        projects={generalUtils.GenerateProjects()}
+        projects={GeneralUtils.GenerateProjects()}
       />
     </>
   );

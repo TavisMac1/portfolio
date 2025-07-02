@@ -19,8 +19,16 @@ export const SKILLS: string = `
 `
 
 export const ABOUT_DESC = `
-Intermediate full stack developer.\n
+*Intermediate full stack developer*.\n
 Enjoys solving logic problems, designing systems, working with bright people, developing code and configuring systems.\n 
 I spend a lot of my time working on personal projects and learning new technologies which peak my interest (hoping to try Elm soon!).\n
 I strongly believe there is no 'I' in team and love teaching, learning and working with others.
+`
+
+export const TRICKS = `
+- Press the *tab* key after typing a few letters of a command to autocomplete!
+\n
+- Press the *enter* key after typing a few letters of a command to autocomplete and submit
+\n
+- Type *'cls'* to clear your history
 `
