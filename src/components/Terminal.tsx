@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, JSXElementConstructor } from "react";
 import { Interfaces } from "../interfaces/main_d";
 import { Enums } from "../enums/enums";
 import { CommandHelper } from "../utils/CommandHelper";
@@ -19,7 +19,7 @@ const COMMANDS: Array<Interfaces.ICommands> = [
 ];
 
 const Terminal: React.FunctionComponent<Interfaces.ITerminalProps> = (props) => {
-    const [history, setHistory] = useState<Array<string>>([]);
+    const [history, setHistory] = useState<Array<React.ReactElement>>([]);
     const [commandHistory, setCommandHistory] = useState<Array<string>>([]);
     const [input, setInput] = useState<string>("");
     const inputRef = useRef<HTMLInputElement>(null);
@@ -71,39 +71,45 @@ const Terminal: React.FunctionComponent<Interfaces.ITerminalProps> = (props) => 
         }
     }
 
-    const handleCommand = (cmd: string): string  => {
+    const handleCommand = (cmd: string): React.ReactElement  => {
         switch (cmd) {
             case Enums.Commands.HELP:
-                return COMMANDS.map(c => `${c.command} - ${c.description}`).join("\n");
+                return <>{ COMMANDS.map(c => `${c.command} - ${c.description}`).join("\n")}</>
             case Enums.Commands.ABOUT:
                 if (determineIfCommandRun(Enums.Commands.ABOUT))
                     props.setProgression(props.progression + 20);
 
-                return ABOUT_DESC;
+                return ABOUT_DESC();
             case Enums.Commands.PROJECTS:
                 if (determineIfCommandRun(Enums.Commands.PROJECTS))
                     props.setProgression(props.progression + 20);
                 
                 props.setProjectViewOpen(true);
-                return "Opening Projects . ."
+                return <>"Opening Projects . ."</>
             case Enums.Commands.CONTACT:
                 if (determineIfCommandRun(Enums.Commands.CONTACT))
                     props.setProgression(props.progression + 20);
 
-                return "Email: macfarlanetavis@protonmail.com";
+                return <>
+                    <div>
+                        Email: <b style={{ color: "dodgerblue" }}>macfarlanetavis@protonmail.com</b>
+                    </div>
+                </>;
             case Enums.Commands.SKILLS:
                 if (determineIfCommandRun(Enums.Commands.SKILLS))
                     props.setProgression(props.progression + 20);
-                return SKILLS;
+                return SKILLS();
             case Enums.Commands.TRICKS:
                 if (determineIfCommandRun(Enums.Commands.TRICKS))
                     props.setProgression(props.progression + 20);
-                return TRICKS;
+                return TRICKS();
             case Enums.Commands.CLS:
                 setHistory([]);
-                return ""
+                return <></>
             default:
-                return `Command not found: ${cmd}`;
+                return <>
+                    Command not found: {cmd}
+                </>
         }
     };
 
@@ -114,7 +120,7 @@ const Terminal: React.FunctionComponent<Interfaces.ITerminalProps> = (props) => 
 
         const output = handleCommand(transformed);
 
-        setHistory(prev => [...prev, `> ${transformed} _`, output]);
+        setHistory(prev => [...prev, <>${transformed}</>, output]);
         setCommandHistory(prev => [...prev, transformed]);
 
         setInput("");
@@ -225,9 +231,7 @@ const Terminal: React.FunctionComponent<Interfaces.ITerminalProps> = (props) => 
                                     padding: "10px"
                                 }}
                             >
-                                <p>
-                                    {splitHistoryText(line)}
-                                </p>
+                                {line}
                             </div>
                         ))
                     : 
