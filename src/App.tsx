@@ -12,7 +12,6 @@ function App() {
   const [displayed, setDisplayed] = useState('');
   const [isProjectDrawerOpen, setIsProjectDrawerOpen] = React.useState<boolean>(false);
   const [progression, setProgression] = React.useState<number>(0);
-  const generalUtils: GeneralUtils = new GeneralUtils();
 
   useEffect(() => {
     let i = 0;

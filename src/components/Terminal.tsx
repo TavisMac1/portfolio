@@ -7,7 +7,6 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { SKILLS, TRICKS } from "../consts";
 import { ABOUT_DESC } from "../consts";
-import { GeneralUtils } from "../utils/GeneralUtils";
 
 const COMMANDS: Array<Interfaces.ICommands> = [
     { command: Enums.Commands.HELP, description: "Show available commands" },
@@ -24,7 +23,7 @@ const Terminal: React.FunctionComponent<Interfaces.ITerminalProps> = (props) => 
     const [input, setInput] = useState<string>("");
     const inputRef = useRef<HTMLInputElement>(null);
     const [visible, setVisible] = useState<boolean>(true);
-    const [historyIndex, setHistoryIndex] = useState<number>(history.length);
+    const [historyIndex, setHistoryIndex] = useState<number>(0);
 
     const handleToggle = () => {
         setVisible((v) => !v);

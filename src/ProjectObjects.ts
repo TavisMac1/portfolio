@@ -2,7 +2,7 @@ import { Interfaces } from "./interfaces/main_d";
 
 export const GoodnightComputer: Interfaces.IProject = {
     title: "Goodnight Computer",
-    description: `Goodnight Computer is an app that allows users to cease background apps using automation, as well as giving them full control over the applications being run on the system.\n`,
+    description: `Goodnight Computer is an app that allows users to cease background apps by creating "playlists" of applications.`,
     image: "gnc_image.png",
     technologies: [
         "C#",
@@ -18,7 +18,7 @@ export const RustExceller: Interfaces.IProject = {
     technologies: [
         "Rust"
     ]
-}
+}  
 
 export const UnityGame: Interfaces.IProject = {
     title: "Unity 3D Multiplayer Video Game",

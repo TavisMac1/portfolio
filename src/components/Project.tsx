@@ -3,17 +3,13 @@ import {
   Box,
   Typography,
   Chip,
-  Stack,
-  useMediaQuery,
-  useTheme,
+  Stack
 } from '@mui/material';
 import { Interfaces } from '../interfaces/main_d';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
 
 export const Project: React.FC<{ project: Interfaces.IProject }> = ({project}) => {
-  const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <Box sx={{ p: { xs: 2, sm: 4 }, position: 'relative', height: '100%' }}>
@@ -82,62 +78,62 @@ export const Project: React.FC<{ project: Interfaces.IProject }> = ({project}) =
         </Typography>
         {project.technologies.length > 0 && (
             <Box sx={{ mt: 2 }}>
-            <Typography
-                variant="subtitle1"
-                sx={{
-                fontFamily: 'monospace',
-                color: '#00FF41',
-                mb: 1,
-                textAlign: 'center',
-                letterSpacing: 1,
-                textShadow: '0 0 4px #00FF41',
-                }}
-            >
-                Technologies Used
-            </Typography>
-            <Stack
-                direction="row"
-                spacing={1}
-                justifyContent="center"
-                flexWrap="wrap"
-                sx={{ mb: 2 }}
-            >
-                {project.technologies.map((tech) => (
-                <Chip
-                    key={tech}
-                    label={tech}
+                <Typography
+                    variant="subtitle1"
                     sx={{
-                    bgcolor: '#181818',
-                    color: '#00FF41',
-                    border: '1px solid #00FF41',
                     fontFamily: 'monospace',
-                    fontSize: '1em',
-                    m: 0.5,
+                    color: '#00FF41',
+                    mb: 1,
+                    textAlign: 'center',
+                    letterSpacing: 1,
+                    textShadow: '0 0 4px #00FF41',
                     }}
-                />
-                ))}
-            </Stack>
+                >
+                    Technologies Used
+                </Typography>
+                <Stack
+                    direction="row"
+                    spacing={1}
+                    justifyContent="center"
+                    flexWrap="wrap"
+                    sx={{ mb: 2 }}
+                >
+                    {project.technologies.map((tech) => (
+                    <Chip
+                        key={tech}
+                        label={tech}
+                        sx={{
+                        bgcolor: '#181818',
+                        color: '#00FF41',
+                        border: '1px solid #00FF41',
+                        fontFamily: 'monospace',
+                        fontSize: '1em',
+                        m: 0.5,
+                        }}
+                    />
+                    ))}
+                </Stack>
             </Box>
         )}
         {/* ASCII art terminal border */}
-    <Box
-        sx={{
-        position: 'absolute',
-        left: 0,
-        bottom: 0,
-        width: '100%',
-        color: '#00FF41',
-        fontFamily: 'monospace',
-        fontSize: '0.8rem',
-        opacity: 0.4,
-        textAlign: 'center',
-        userSelect: 'none',
-        pointerEvents: 'none',
-        letterSpacing: 1,
-        }}
-    >
-        {'└' + '─'.repeat(40) + '┘'}
-    </Box>
+        <Box
+            sx={{
+            position: 'absolute',
+            left: 0,
+            bottom: 0,
+            width: '100%',
+            color: '#00FF41',
+            fontFamily: 'monospace',
+            fontSize: '0.8rem',
+            opacity: 0.4,
+            textAlign: 'center',
+            userSelect: 'none',
+            pointerEvents: 'none',
+            letterSpacing: 1,
+            }}
+        >
+            {'└' + '─'.repeat(40) + '┘'}
+        </Box>
     </Box>
   );
 };
