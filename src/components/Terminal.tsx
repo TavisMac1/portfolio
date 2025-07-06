@@ -120,7 +120,7 @@ const Terminal: React.FunctionComponent<Interfaces.ITerminalProps> = (props) => 
 
         const output = handleCommand(transformed);
 
-        setHistory(prev => [...prev, <>${transformed}</>, output]);
+        setHistory(prev => [...prev, <>&gt; {transformed}</>, output]);
         setCommandHistory(prev => [...prev, transformed]);
 
         setInput("");
@@ -247,8 +247,9 @@ const Terminal: React.FunctionComponent<Interfaces.ITerminalProps> = (props) => 
                     borderTop: "1px solid #222",
                     background: "#181818",
                     padding: "8px 16px",
+                    height: "100%"
                 }}
-                onClick={() => inputRef.current?.focus}
+                onClick={() => inputRef.current?.focus()}
             >
                 <span style={{ color: "#33FF33", marginRight: 4 }}>&gt;</span>
                 <input
@@ -262,7 +263,8 @@ const Terminal: React.FunctionComponent<Interfaces.ITerminalProps> = (props) => 
                         color: "#33FF33",
                         fontFamily: "monospace",
                         fontSize: 15,
-                        flex: 1
+                        flex: 1,
+                        height: "fit-content"
                     }}
                     type="text-area"
                     autoComplete="off"
