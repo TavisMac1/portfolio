@@ -31,4 +31,6 @@ export const TRICKS = `
 - Press the *enter* key after typing a few letters of a command to autocomplete and submit
 \n
 - Type *'cls'* to clear your history
+\n
+- Use the UP Arrow and DOWN Arrow Keys to go to navgiate through your command history
 `

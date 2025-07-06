@@ -7,6 +7,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { SKILLS, TRICKS } from "../consts";
 import { ABOUT_DESC } from "../consts";
+import { KeyboardCommandKey } from "@mui/icons-material";
 
 const COMMANDS: Array<Interfaces.ICommands> = [
     { command: Enums.Commands.HELP, description: "Show available commands" },
@@ -41,6 +42,35 @@ const Terminal: React.FunctionComponent<Interfaces.ITerminalProps> = (props) => 
         return true;
     }
 
+    const handleKeydown = (event: React.KeyboardEvent<HTMLInputElement>): void => {
+        if (event.key === "ArrowUp") {
+            event.preventDefault();
+            if (
+                historyIndex > 0 &&
+                commandHistory[historyIndex - 1] !== undefined
+            ) 
+            {
+                setInput(commandHistory[historyIndex - 1]);
+                setHistoryIndex(historyIndex - 1);
+            }
+        } 
+        else if (event.key === "ArrowDown") {
+            event.preventDefault();
+            if (
+                historyIndex < commandHistory.length - 1 &&
+                commandHistory[historyIndex + 1] !== undefined
+            ) {
+                setHistoryIndex(historyIndex + 1);
+            }
+        }
+       else if (event.key === "Tab") {
+            event.preventDefault();
+            setInput(
+                CommandHelper.MatchToCommand(input)
+            );
+        }
+    }
+
     const handleCommand = (cmd: string): string  => {
         switch (cmd) {
             case Enums.Commands.HELP:
@@ -59,7 +89,7 @@ const Terminal: React.FunctionComponent<Interfaces.ITerminalProps> = (props) => 
             case Enums.Commands.CONTACT:
                 if (determineIfCommandRun(Enums.Commands.CONTACT))
                     props.setProgression(props.progression + 20);
-                
+
                 return "Email: macfarlanetavis@protonmail.com";
             case Enums.Commands.SKILLS:
                 if (determineIfCommandRun(Enums.Commands.SKILLS))
@@ -195,17 +225,9 @@ const Terminal: React.FunctionComponent<Interfaces.ITerminalProps> = (props) => 
                                     padding: "10px"
                                 }}
                             >
-                                {   <>
-                                        <p>
-                                            {splitHistoryText(line)}
-                                        </p>
-                                        {/*
-                                        <p style={{color: "blue"}}>
-                                            {splitHistoryText(line)}
-                                        </p>
-                                        */}
-                                    </>
-                                } 
+                                <p>
+                                    {splitHistoryText(line)}
+                                </p>
                             </div>
                         ))
                     : 
@@ -241,27 +263,7 @@ const Terminal: React.FunctionComponent<Interfaces.ITerminalProps> = (props) => 
                     type="text-area"
                     autoComplete="off"
                     placeholder="Type a command here"
-                    onKeyDown={e => {
-                        if (e.key === "Tab") {
-
-                            // prevents URL bar focus
-                            e.preventDefault();
-
-                            setInput(
-                                CommandHelper.MatchToCommand(input)
-                            );
-                        }
-                        else if (e.key === "ArrowUp") {
-                            e.preventDefault();
-                            if (    
-                                historyIndex !== commandHistory.length && 
-                                commandHistory[historyIndex -1] !== null &&
-                                commandHistory[historyIndex -1] !== "undefined"
-                            ) {
-                                setHistoryIndex(historyIndex -1);
-                            }
-                        }
-                    }}
+                    onKeyDown={(e) =>handleKeydown(e) }
                 />
             </form>
           </div>
