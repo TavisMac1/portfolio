@@ -21,8 +21,8 @@ export const RustExceller: Interfaces.IProject = {
 }  
 
 export const UnityGame: Interfaces.IProject = {
-    title: "Unity 3D Multiplayer Video Game",
-    description: "A 3D multiplayer video game, similar to Counter Strike, based in the WW2 era.",
+    title: "Unity 3D Video Game",
+    description: "A 3D multiplayer video game, similar to Counter Strike, based in the WW2 era. \n",
     image: "flh_image.png",
     technologies: [
         "Unity",
