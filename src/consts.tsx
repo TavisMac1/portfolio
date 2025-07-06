@@ -1,5 +1,9 @@
+import React from "react";
+
 export const LINKEDIN: string = "https://www.linkedin.com/in/tavis-macfarlane-550b23175/";
 export const GITHUB: string = "https://github.com/TavisMac1";
+export const HIGHLIGHT_COLOR = {color: "dodgerblue"} as React.CSSProperties
+
 
 export const SKILLS = (): React.ReactElement => {
       return ( 
@@ -40,7 +44,7 @@ export const SKILLS = (): React.ReactElement => {
 export const ABOUT_DESC = (): React.ReactElement =>{
       return (
             <>
-                  <h3 style={{color: "purple"}}>
+                  <h3 style={HIGHLIGHT_COLOR}>
                         Intermediate full stack developer
                   </h3>
                   <p>
@@ -55,23 +59,13 @@ export const ABOUT_DESC = (): React.ReactElement =>{
 export const TRICKS = (): React.ReactElement => {
       return (
             <>
-                  <ul>
-                        <li>
-                              Press the <span style={{color: "purple"}}><b>tab</b></span> key after typing a few letters of a command to autocomplete!
-                        </li>
-                        <br/>
-                        <li>
-                              Press the <span style={{color: "purple"}}>enter</span> key after typing a few letters of a command to autocomplete and submit
-                        </li>
-                        <br />
-                        <li>
-                              Type <span style={{color:"purple"}}>'cls'</span> to clear your history
-                        </li>
-                        <br />
-                        <li>
-                              Use the UP Arrow and DOWN Arrow Keys to go to navgiate through your command history
-                        </li>
-                  </ul>
+                  - Press the <span style={HIGHLIGHT_COLOR}><b>tab</b></span> key after typing a few letters of a command to autocomplete!
+                  <br/><br/>
+                  - Press the <span style={HIGHLIGHT_COLOR}><b>enter</b></span> key after typing a few letters of a command to autocomplete and submit
+                  <br/><br/>
+                  - Type <span style={HIGHLIGHT_COLOR}><b>'cls'</b></span> to clear your history
+                  <br/><br/>
+                  - Use the <b style={HIGHLIGHT_COLOR}>UP Arrow</b> and <b style={HIGHLIGHT_COLOR}>DOWN Arrow</b> Keys  to navgiate through your command history
             </>
       );
 } 
