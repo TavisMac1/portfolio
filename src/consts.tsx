@@ -1,9 +1,19 @@
+import DecryptedText from "./blocks/TextAnimations/DecryptedText/DecryptedText";
 import React from "react";
 
 export const LINKEDIN: string = "https://www.linkedin.com/in/tavis-macfarlane-550b23175/";
 export const GITHUB: string = "https://github.com/TavisMac1";
 export const HIGHLIGHT_COLOR = {color: "dodgerblue"} as React.CSSProperties
 
+export const CHARACTER_COLORS = [
+      "yellow",
+      "red",
+      "green",
+      "purple",
+      "blue",
+      "orange",
+      "white"
+];
 
 export const SKILLS = (): React.ReactElement => {
       return ( 
@@ -44,14 +54,45 @@ export const SKILLS = (): React.ReactElement => {
 export const ABOUT_DESC = (): React.ReactElement =>{
       return (
             <>
-                  <h3 style={HIGHLIGHT_COLOR}>
-                        Intermediate full stack developer
-                  </h3>
-                  <p>
-                        Enjoys solving logic problems, designing systems, working with bright people, developing code and configuring systems. <br /><br />
-                        I spend a lot of my time working on personal projects and learning new technologies which peak my interest (hoping to try Elm soon!). <br /><br />
-                        I strongly believe there is no 'I' in team and love teaching, learning and working with others.
-                  </p>
+                  <DecryptedText
+                        text="Intermediate full stack developer"
+                        animateOn="view"
+                        revealDirection="center"
+                        color="dodgerblue"
+                        speed={100}
+                        style={{color:"dodgerblue"}}
+                  />
+                  <br/><br/>
+                  <DecryptedText
+                        text="Enjoys solving logic problems, designing systems, 
+                              working with bright people, developing code and configuring systems.
+                              "
+                        animateOn="view"
+                        revealDirection="center"
+                        color="dodgerblue"
+                        speed={100}
+                  />
+                  <br/><br />
+                  <DecryptedText
+                        text="I spend a lot of my time working on personal projects 
+                              and learning new technologies which peak my interest 
+                              (hoping to try Elm soon!).
+                              "
+                        animateOn="view"
+                        revealDirection="center"
+                        color="dodgerblue"
+                        speed={100}
+                  />
+                  <br/><br />
+                  <DecryptedText
+                        text="I strongly believe there is no 'I' in 
+                              team and love teaching, learning and working with others.
+                              "
+                        animateOn="view"
+                        revealDirection="center"
+                        color="dodgerblue"
+                        speed={100}
+                  />
             </>
       )
 } 

@@ -7,7 +7,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { SKILLS, TRICKS } from "../consts";
 import { ABOUT_DESC } from "../consts";
-import { KeyboardCommandKey } from "@mui/icons-material";
+import { GeneralUtils } from "../utils/GeneralUtils";
 
 const COMMANDS: Array<Interfaces.ICommands> = [
     { command: Enums.Commands.HELP, description: "Show available commands" },
@@ -85,7 +85,10 @@ const Terminal: React.FunctionComponent<Interfaces.ITerminalProps> = (props) => 
                     props.setProgression(props.progression + 20);
                 
                 props.setProjectViewOpen(true);
-                return <>"Opening Projects . ."</>
+
+                return <>
+                    Opening Projects...
+                </>
             case Enums.Commands.CONTACT:
                 if (determineIfCommandRun(Enums.Commands.CONTACT))
                     props.setProgression(props.progression + 20);

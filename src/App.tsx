@@ -5,6 +5,8 @@ import { LINKEDIN, GITHUB } from './consts';
 import ProjectsView from './components/ProjectsView';
 import { GeneralUtils } from './utils/GeneralUtils';
 import { Progression } from './components/Progression';
+import ShinyText from './blocks/TextAnimations/ShinyText/ShinyText';
+import GlitchText from './blocks/TextAnimations/GlitchText/GlitchText';
 
 const typingText = "Hi, I'm Tavis!";
 
@@ -127,7 +129,11 @@ function App() {
                 color: '#B2FFB2',
               }}
             >
-              Full Stack Developer
+              <ShinyText 
+                text="Full Stack Developer" 
+                disabled={false} 
+                speed={3} 
+              />
               <br />
               <span>------------------------------</span><br/>
               Welcome to my portfolio! <br />
@@ -151,6 +157,7 @@ function App() {
               >
                 {'LINKEDIN'}
               </Button>
+
               <Button
                 variant="outlined"
                 sx={{

@@ -1,6 +1,7 @@
 import React from "react";
 import { GoodnightComputer, RustExceller, UnityGame } from "../ProjectObjects";
 import { Project } from "../components/Project";
+import { CHARACTER_COLORS } from "../consts";
 
 export class GeneralUtils 
 {
@@ -40,5 +41,27 @@ export class GeneralUtils
         element.append("</div>");
 
         return element; 
+    }
+
+    public static CreateColorfulString(str: string): Array<HTMLDivElement>
+    {
+        if (str.length == 0) return [];
+        
+        let charArray: Array<string> = Array.from(str);
+        let elementArray: Array<HTMLDivElement> = [];
+        
+        charArray.forEach(element => {
+            const newElement = document.createElement('div');
+            newElement.textContent = element;
+            newElement.style.color = CHARACTER_COLORS[
+                Math.floor(Math.random() * CHARACTER_COLORS.length)
+            ];
+            
+            elementArray.push(
+                newElement
+            );
+        });
+
+        return elementArray;
     }
 }
